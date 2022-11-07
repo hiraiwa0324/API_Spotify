@@ -7,18 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="https://accounts.spotify.com/authorize?client_id=bc89b7bbdfce4cba822c5198445bf19b&response_type=code&redirect_uri=http://localhost">こちらからスタート</a>
-    <script>
-        fetch("https://accounts.spotify.com/authorize?client_id=bc89b7bbdfce4cba822c5198445bf19b&response_type=code&redirect_uri=http://localhost")
-        .then(response => {
-            return response.arrayBuffer();
-        })
-        .then(arrayBuffer => {
-            console.log(arrayBuffer);
-        })
-        .catch(error => {
-            console.log("失敗しました");
-        });
-    </script>
+    <a href="https://accounts.spotify.com/authorize?client_id=bc89b7bbdfce4cba822c5198445bf19b&response_type=code&redirect_uri=http://localhost">ログイン</a>
 </body>
 </html>
