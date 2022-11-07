@@ -21,7 +21,15 @@ let url = new URL(window.location.href);
 let params = url.searchParams;
 
 let code = params.get('code')
-
+if ( code ) {
+    const res = await fecth('https://api.spotify.com/v1/search?type=album&include_external=audio',
+        {
+            headers: {
+                Authorization: code,
+            }
+        }
+    )
+}
 </script>
 </body>
 </html>
