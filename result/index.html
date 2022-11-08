@@ -14,22 +14,31 @@
     </div>
 
 <script>
+
+const client_id = "bc89b7bbdfce4cba822c5198445bf19b";
+const client_secret = "f0b62632c5a9489e9973b49c9d55e9bc";
 // リダイレクトで取得した ?code のパラメータを取得
 window.addEventListener('load', function() {
-let url = new URL(window.location.href);
 
-let params = url.searchParams;
+    let url = new URL(window.location.href);
 
-let code = params.get('code')
-getSearch(code)
+    let params = url.searchParams;
+
+    let code = params.get('code')
+
+    getToken(code)
 
 });
-function getSearch(code) {
-    if ( code ) {
-        const res = fetch('https://api.spotify.com/v1/search?type=album&include_external=audio',
+
+function getToken(code) {
+    if ( code != "" ) {
+        const res = fetch('https://accounts.spotify.com/api/token',
             {
+                form: {
+                    code: code,
+                },
                 headers: {
-                    Authorization: code,
+                    'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
                 }
             }
         )
@@ -41,6 +50,26 @@ function getSearch(code) {
         })
     }
 }
+
+// function getSearch(code) {
+//     if ( code != "" ) {
+//         const res = fetch('https://api.spotify.com/v1/search?type=album&include_external=audio',
+//             {
+//                 headers: {
+//                     Authorization: code,
+//                 }
+//             }
+//         )
+//         .then(function (data) {
+//             return data.json();
+//         })
+//         .then(function (json) {
+//             console.log(`json ${json}`)
+//         })
+//     }
+// }
+
+
 </script>
 </body>
 </html>
