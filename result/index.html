@@ -49,6 +49,7 @@ function getToken(code) {
             }
         )
         .then(function (data) {
+            // APIからの返答を変換
             return data.json();
         })
         .then(function (json) {
