@@ -15,26 +15,31 @@
 
 <script>
 // リダイレクトで取得した ?code のパラメータを取得
-
+window.addEventListener('load', function() {
 let url = new URL(window.location.href);
 
 let params = url.searchParams;
 
 let code = params.get('code')
+getSearch(code)
 
-
-
-if ( code ) {
-    const res = fetch('https://api.spotify.com/v1/search?type=album&include_external=audio',
-        {
-            headers: {
-                Authorization: code,
+});
+function getSearch(code) {
+    if ( code ) {
+        const res = fetch('https://api.spotify.com/v1/search?type=album&include_external=audio',
+            {
+                headers: {
+                    Authorization: code,
+                }
             }
-        }
-    )
-    console.log(`res ${res}`)
-    const result = res.json()
-    console.log(`result ${result}`)
+        )
+        .then(function (data) {
+            return data.json();
+        })
+        .ethen(function (json) {
+            console.log(`json ${json}`)
+        })
+    }
 }
 </script>
 </body>
