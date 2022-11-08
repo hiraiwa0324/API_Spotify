@@ -37,6 +37,7 @@ function getToken(code) {
     if ( code != "" ) {
         const res = fetch('https://accounts.spotify.com/api/token',
             {
+                method: "POST",
                 form: {
                     code: code,
                     grant_type: 'authorization_code',
