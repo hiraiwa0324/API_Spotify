@@ -54,6 +54,10 @@ function getToken(code) {
         })
         .then(function (json) {
             console.log(`json ${json}`)
+            const accessToken = json.access_token
+            const refreshToken = json.refresh_token
+            console.log(`accessToken => ${accessToken}`)
+            console.log(`refreshToken => ${refreshToken}`)
         })
     }
 }
