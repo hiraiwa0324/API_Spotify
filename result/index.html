@@ -18,7 +18,7 @@
 const client_id = "bc89b7bbdfce4cba822c5198445bf19b";
 const client_secret = "f0b62632c5a9489e9973b49c9d55e9bc";
 const redirect_uri = "https://hiraiwa0324.github.io/API_Spotify/result/";
-
+const encoded = btoa(client_id + ':' + client_secret);
 
 // リダイレクトで取得した ?code のパラメータを取得
 window.addEventListener('load', function() {
@@ -40,10 +40,10 @@ function getToken(code) {
                 form: {
                     code: code,
                     grant_type: 'authorization_code',
-                    redirect_uri: redirect_uri
+                    redirect_uri: redirect_uri // 実際は飛ばない
                 },
                 headers: {
-                    'Authorization': 'Basic ' + client_id + ':' + client_secret
+                    'Authorization': 'Basic ' + encoded
                 }
             }
         )
