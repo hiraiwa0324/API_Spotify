@@ -10,7 +10,7 @@
 <body class="bg-gray-500">
 
     <div class="container mx-auto">
-        <h1 class="text-xl text-white" id="result_status">認証成功！</h1>
+        <h1 class="text-xl text-white" id="result_status"></h1>
     </div>
 
 <script>
@@ -60,6 +60,10 @@ function getToken(code) {
             const refreshToken = json.refresh_token
             console.log(`accessToken => ${accessToken}`)
             console.log(`refreshToken => ${refreshToken}`)
+            resultStatus.innerHTML = '認証成功！';
+        })
+        .catch(error => {
+            resultStatus.innerHTML = '何か問題があるようです';
         })
     }
 }
