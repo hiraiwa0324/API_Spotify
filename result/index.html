@@ -10,23 +10,23 @@
 <body class="bg-gray-500">
 
     <div class="container mx-auto">
-        <h1 class="text-xl text-white">認証成功！</h1>
+        <h1 class="text-xl text-white" id="result_status">認証成功！</h1>
     </div>
 
 <script>
 
-const client_id = "bc89b7bbdfce4cba822c5198445bf19b";
-const client_secret = "f0b62632c5a9489e9973b49c9d55e9bc";
-const redirect_uri = "https://hiraiwa0324.github.io/API_Spotify/result/";
-const encoded = btoa(client_id + ':' + client_secret);
+const clientId = "bc89b7bbdfce4cba822c5198445bf19b";
+const clientSecret = "f0b62632c5a9489e9973b49c9d55e9bc";
+const redirectUri = "https://hiraiwa0324.github.io/API_Spotify/result/";
+const encoded = btoa(clientId + ':' + clientSecret);
+
+const resultStatus = document.getElementById('result_status')
 
 // リダイレクトで取得した ?code のパラメータを取得
 window.addEventListener('load', function() {
 
     let url = new URL(window.location.href);
-
     let params = url.searchParams;
-
     let code = params.get('code')
 
     getToken(code)
@@ -34,17 +34,19 @@ window.addEventListener('load', function() {
 });
 
 function getToken(code) {
-    if ( code != "" ) {
-        const res = fetch('https://accounts.spotify.com/api/token',
+
+    if ( !code ) {
+        fetch('https://accounts.spotify.com/api/token',
             {
                 method: "POST",
                 form: {
                     code: code,
                     grant_type: 'authorization_code',
-                    redirect_uri: redirect_uri // 実際は飛ばない
+                    redirect_uri: redirectUri // 実際は飛ばない
                 },
                 headers: {
-                    'Authorization': 'Basic ' + encoded
+                    'Authorization': 'Basic ' + encoded ,
+                    'Content-Type': 'application/json'
                 }
             }
         )
@@ -62,23 +64,7 @@ function getToken(code) {
     }
 }
 
-// function getSearch(code) {
-//     if ( code != "" ) {
-//         const res = fetch('https://api.spotify.com/v1/search?type=album&include_external=audio',
-//             {
-//                 headers: {
-//                     Authorization: code,
-//                 }
-//             }
-//         )
-//         .then(function (data) {
-//             return data.json();
-//         })
-//         .then(function (json) {
-//             console.log(`json ${json}`)
-//         })
-//     }
-// }
+
 
 
 </script>
